@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
 {
@@ -27,7 +28,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view("Sliders.create");
+        return view("Sliders.oldCreate");
     }
 
     /**
@@ -38,10 +39,24 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $title = $request->title;
-        $description = $request->description;
-        $image = $request->image;
-        $url = $request->url;
+        $title=$request->title;
+        $description=$request->description;
+        $url=$request->url;
+        $request->validate([
+            "title"=>"required",
+            "description"=>"required",
+            "image"=>"required|mimes:jpg,jpeg,svg,png|max:5048",
+            "url"=>"required",
+
+        ]);
+
+
+
+        $filename = time().$request->file('image')->getClientOriginalName();
+        dd($filename);
+        $path = $request->file('image')->storeAs('images',$filename,'public');
+        $image = '/storage/'.$path;
+
         Slider::create( [
             "title"=>$title,
             "description"=>$description,
