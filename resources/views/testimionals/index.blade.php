@@ -12,7 +12,7 @@
     @foreach($testimionals as $testimional)
     <p>
         {{$testimional->id}} -
-        {{$testimional->name}} -
+        {{$testimional->name}}   
         <a href="/Testimionals/{{$testimional->id}}">Details</a>
 
     </p>

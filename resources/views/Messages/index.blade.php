@@ -12,7 +12,7 @@
     @foreach($messages as $message)
     <p>
         {{$message->id}} -
-       Name : {{$message->name}} ,
+       Name : {{$message->name}} 
         <a href="/messages/{{$message->id}}">details</a> 
     </p>
     @endforeach

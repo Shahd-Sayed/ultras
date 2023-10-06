@@ -28,7 +28,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view("Sliders.oldCreate");
+        return view("Sliders.create");
     }
 
     /**
@@ -41,21 +41,23 @@ class SliderController extends Controller
     {
         $title=$request->title;
         $description=$request->description;
+        $image=$request->image;
         $url=$request->url;
-        $request->validate([
-            "title"=>"required",
-            "description"=>"required",
-            "image"=>"required|mimes:jpg,jpeg,svg,png|max:5048",
-            "url"=>"required",
 
-        ]);
+        // $request->validate([
+        //     "title"=>"required",
+        //     "description"=>"required",
+        //     "image"=>"required|mimes:jpg,jpeg,svg,png|max:5048",
+        //     "url"=>"required",
+
+        // ]);
 
 
 
-        $filename = time().$request->file('image')->getClientOriginalName();
-        dd($filename);
-        $path = $request->file('image')->storeAs('images',$filename,'public');
-        $image = '/storage/'.$path;
+        // $filename = time().$request->file('image')->getClientOriginalName();
+        // dd($filename);
+        // $path = $request->file('image')->storeAs('images',$filename,'public');
+        // $image = '/storage/'.$path;
 
         Slider::create( [
             "title"=>$title,
